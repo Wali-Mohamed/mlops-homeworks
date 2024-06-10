@@ -45,7 +45,7 @@ def train_and_log_model(data_path, params):
 @click.command()
 @click.option(
     "--data_path",
-    default="./output",
+    default="./homework/output",
     help="Location where the processed NYC taxi trip data was saved"
 )
 @click.option(
