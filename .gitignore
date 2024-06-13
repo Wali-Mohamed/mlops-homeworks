@@ -164,3 +164,7 @@ cython_debug/
 */mlruns
 */mlartifacts
 *.db
+
+funfair.ipynb
+response1.py
+response2.py
