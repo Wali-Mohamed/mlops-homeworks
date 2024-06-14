@@ -8,6 +8,7 @@ from sklearn.metrics import mean_squared_error
 mlflow.set_tracking_uri("sqlite:///mlflow.db")
 mlflow.set_experiment("nyc-taxi-homework2")
 LOCAL_TRACKING_SERVER = "http://127.0.0.1:5000"
+
 def load_pickle(filename: str):
     with open(filename, "rb") as f_in:
         return pickle.load(f_in)
@@ -20,10 +21,12 @@ def load_pickle(filename: str):
     help="Location where the processed NYC taxi trip data was saved"
 )
 def run_train(data_path: str):
-
+    mlflow.sklearn.autolog()
     X_train, y_train = load_pickle(os.path.join(data_path, "train.pkl"))
     X_val, y_val = load_pickle(os.path.join(data_path, "val.pkl"))
-    mlflow.sklearn.autolog()
+    X_test, y_test = load_pickle(os.path.join(data_path, "test.pkl"))
+    
+   
     with mlflow.start_run():
         rf = RandomForestRegressor(max_depth=10, random_state=0)
         rf.fit(X_train, y_train)
